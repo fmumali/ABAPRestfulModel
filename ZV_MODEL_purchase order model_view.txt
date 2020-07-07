@@ -1,0 +1,17 @@
+@AbapCatalog.sqlViewName: 'ZV_MODEL'
+@AbapCatalog.compiler.compareFilter: true
+@AbapCatalog.preserveKey: true
+@AccessControl.authorizationCheck: #CHECK
+@EndUserText.label: 'Purchase Order Data Model'
+define root view Z_R_ORDER as select from zporder 
+    association [1..*] to Z_I_ITEMS as items on $projection.po_order = items.po_order {
+        //zporder
+        key po_order,
+        comp_code,
+        doc_type,
+        vendor,
+        status,
+        created_by,
+        created_at,
+        items
+    }

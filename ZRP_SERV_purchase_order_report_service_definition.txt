@@ -1,0 +1,5 @@
+@EndUserText.label: 'Purchase Order Report Service Definition'
+define service ZRP_SERV {
+  expose ZRP_VIEW;
+  expose Z_I_ITEMS;
+}

@@ -1,0 +1,53 @@
+CLASS zcl_porder_generate_data DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+  PUBLIC SECTION.
+    INTERFACES if_oo_adt_classrun.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+ENDCLASS.
+
+
+
+CLASS zcl_porder_generate_data IMPLEMENTATION.
+
+METHOD if_oo_adt_classrun~main.
+        DATA: itab TYPE TABLE OF zporder,
+              itab2 TYPE TABLE OF zporderitems.
+
+* read current timestamp
+      GET TIME STAMP FIELD DATA(ztime).
+
+* fill internal PO Header internal table(itab)
+      itab = VALUE #(
+      ( po_order = '2000220001' comp_code = 'UE02' doc_type ='ZMM1' vendor ='1000110001' status ='P' created_by ='Felicity Smoak' created_at = ztime )
+      ( po_order = '2000220002' comp_code = 'UE45' doc_type ='ZMM2' vendor ='1000110002' status ='P' created_by ='Nyssa Raatko' created_at = ztime )
+      ( po_order = '2000220003' comp_code = 'US07' doc_type ='ZMM3' vendor ='1000110003' status ='C' created_by ='Hunter Zolomon' created_at = ztime )
+      ( po_order = '2000220004' comp_code = 'AB34' doc_type ='ZMM4' vendor ='1000110004' status ='C' created_by ='Damien Darhk' created_at = ztime )
+      ( po_order = '2000220005' comp_code = 'SK18' doc_type ='ZMM5' vendor ='1000110005' status ='D' created_by ='Rila Fukushima' created_at = ztime )
+      ( po_order = '2000220006' comp_code = 'RU37' doc_type ='ZMM6' vendor ='1000110006' status ='D' created_by ='Anatoly Keynoz' created_at = ztime )
+      ( po_order = '2000220007' comp_code = 'PO02' doc_type ='ZMM7' vendor ='1000110001' status ='P' created_by ='Jackton Motto' created_at = ztime )
+       ).
+
+* fill internal PO items internal table(itab2)
+      itab2 = VALUE #(
+      ( po_order = '2000220001' order_item = '14' unit = 'PC' quantity = '8' )
+      ( po_order = '2000220002' order_item = '30' unit = 'KG' quantity = '40.7' )
+      ( po_order = '2000220003' order_item = '24' unit = 'PC' quantity = '20' )
+      ( po_order = '2000220004' order_item = '12' unit = 'KG' quantity = '33.4' )
+      ( po_order = '2000220005' order_item = '27' unit = 'KG' quantity = '18.5' )
+      ( po_order = '2000220006' order_item = '37' unit = 'PC' quantity = '8' )
+      ( po_order = '2000220007' order_item = '300' unit = 'KG' quantity = '100' )
+      ).
+
+* insert the table entries
+      INSERT zporder FROM TABLE @itab.
+      INSERT zporderitems FROM TABLE @itab2.
+
+      out->write( 'Purchase Order data inserted successfully!' ).
+
+     ENDMETHOD.
+
+ENDCLASS.

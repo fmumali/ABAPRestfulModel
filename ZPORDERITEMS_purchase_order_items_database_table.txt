@@ -1,0 +1,14 @@
+@EndUserText.label : 'PORDERITEMS'
+@AbapCatalog.enhancementCategory : #NOT_EXTENSIBLE
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #A
+@AbapCatalog.dataMaintenance : #RESTRICTED
+define table zporderitems {
+  key client     : abap.clnt not null;
+  key po_order   : abap.char(10) not null;
+  key order_item : abap.numc(4) not null;
+  unit           : abap.unit(3);
+  @Semantics.quantity.unitOfMeasure : 'zporderitems.unit'
+  quantity       : abap.quan(10,3);
+
+}

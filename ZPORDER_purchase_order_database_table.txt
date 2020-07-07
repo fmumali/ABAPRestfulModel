@@ -1,0 +1,16 @@
+@EndUserText.label : 'PORDER'
+@AbapCatalog.enhancementCategory : #NOT_EXTENSIBLE
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #A
+@AbapCatalog.dataMaintenance : #RESTRICTED
+define table zporder {
+  key client   : abap.clnt not null;
+  key po_order : abap.char(10) not null;
+  comp_code    : abap.char(10);
+  doc_type     : abap.char(4);
+  vendor       : abap.numc(10);
+  status       : abap.char(4);
+  created_by   : syuname;
+  created_at   : timestampl;
+
+}
